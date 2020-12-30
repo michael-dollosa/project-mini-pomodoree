@@ -116,14 +116,22 @@
                 justify-content: center;
                 align-items: center;
             }
-
+            li:first-child {
+                font-weight: 700;
+            }
             li {
                 line-height: 3rem;
                 
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-
+                p {
+                    margin-top: 2rem;                    
+                    line-height: 1rem;
+                    font-size: .8rem;
+                    color: var(--color-pomodoro);
+                    font-style: italic;
+                }
                 input {
                     font-family: inherit;
                     width: 3.5rem;

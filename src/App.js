@@ -22,9 +22,9 @@ class App extends React.Component {
         longbreakTime: 15, //in minutes
 
         //form
-        pomodoroInput: 0,
-        breakInput: 0,
-        longbreakInput: 0
+        pomodoroInput: 30,
+        breakInput: 5,
+        longbreakInput: 15
     }
     
 
@@ -94,11 +94,23 @@ class App extends React.Component {
     //listender to update input State 
     inputListener = (input) => {
         const key = input.name
-        const value = parseInt(input.value)
+        const value = parseFloat(input.value)
 
-        this.setState({
-            [key]: value
-        })
+        if(value < 0) {
+            this.setState({
+                [key]: 0
+            })
+        }
+        else if (value > 60) {
+            this.setState({
+                [key]: 60
+            })
+        }
+        else {
+            this.setState({
+                [key]: value
+            })
+        }
         
     }
 
@@ -126,7 +138,9 @@ class App extends React.Component {
 
     render() {
         const { totalTime, toggle, ...otherProps } = this.state
-
+        if(this.state.totalTime === 0){
+            this.changeCategory(this.state.isActive)
+        }
         return(
             <div className={"container " + [this.state.isActive + "BG"]}>
                 <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>

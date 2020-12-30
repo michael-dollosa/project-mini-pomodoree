@@ -2,7 +2,7 @@ import React from 'react'
 import './options.styles.scss'
 import { FaRegTimesCircle } from "react-icons/fa";
 
-const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, pomodoroTime, _breakTime, longbreakTime, pause, countdown }) => {
+const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, pomodoroTime, _breakTime, longbreakTime, pomodoroInput, breakInput, longbreakInput}) => {
 
     return (
         <div className={ optionsToggle ? "container-options" : "container-options display-none"}>
@@ -14,24 +14,30 @@ const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, po
                 </div>
                 <div className="container-options__main__body">
                     <ul className="body__list">
+                        <li>category <label>minutes</label></li>
                         <li>
                             pomodoro 
                             <input 
-                                type="text" 
-                                maxLength="2"
+                                type="number" 
+                                //maxLength="2"
+                                min="1"
+                                max="2"
                                 name="pomodoroInput"
+                                value={pomodoroInput}
                                 placeholder = {pomodoroTime}
                                 onChange={(event) => inputListener(event.target)}
                             />
-                        
+                            
                         </li>
                         <li>
                             break
                             <input 
-                                type="text" 
-                                maxLength="2"
+                                type="number" 
+                                min="1"
+                                max="2"
                                 name="breakInput"
                                 placeholder = {_breakTime}
+                                value={breakInput}
                                 onChange={(event) => inputListener(event.target)}
                             /> 
                         
@@ -39,13 +45,16 @@ const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, po
                         <li>
                             long break 
                             <input 
-                                type="text" 
-                                maxLength="2"
+                                type="number" 
+                                min="1"
+                                max="2"
                                 name="longbreakInput"
                                 placeholder = {longbreakTime}
+                                value={longbreakInput}
                                 onChange={(event) => inputListener(event.target)}
                             /> 
                         </li>
+                        <li><p>Note: Time should be between 1 to 60 minutes.</p></li>
                     </ul>
 
                     <button onClick={() => optionsSave() }>save</button>
