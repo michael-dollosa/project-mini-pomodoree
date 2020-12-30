@@ -10,17 +10,17 @@ const Timer = ({time, category}) => {
         switch(category) {
             case "pomodoro":
                 document.title = formatTime(time) + " - Time to focus!"
-                link.href = "%PUBLIC_URL%/favicon.ico";
+                link.href = "/favicon.ico";
             break
 
             case "_break":
                 document.title = formatTime(time) + " - Take a quick break"
-                link.href = "%PUBLIC_URL%/favicon-break.ico";
+                link.href = "/favicon-break.ico";
             break
 
             case "longbreak":
                 document.title = formatTime(time) + " - Take a long break"
-                link.href = "%PUBLIC_URL%/favicon-longbreak.ico";
+                link.href = "/favicon-longbreak.ico";
             break
 
             default:
