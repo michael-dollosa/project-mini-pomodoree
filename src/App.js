@@ -45,9 +45,13 @@ class App extends React.Component {
     //function for start
     countdown = () => {
         this.setState({ toggle: true })
-        this.clearId = setInterval(() => this.setState(state => ({
+        this.clearId = setInterval(() => {
+            
+            this.setState(state => ({
             totalTime: this.state.totalTime - 1
-        })), 1000)
+            })
+            
+        )}, 1000)
     }
 
     //function for pause/clearInterval id
@@ -130,7 +134,7 @@ class App extends React.Component {
                 <div className="container-main">
                     <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
                     <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
-                    <Timer time={totalTime} />
+                    <Timer time={totalTime} category={this.state.isActive} />
                     <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
                 </div>
             </div>

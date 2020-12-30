@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './timer.styles.scss'
 
-const Timer = ({time}) => {
-    
-    
+const Timer = ({time, category}) => {
+   
+    const link = document.querySelector("link[rel~='icon']");
+
+    //use effect is used to modify the document title
+    useEffect(() => {
+        switch(category) {
+            case "pomodoro":
+                document.title = formatTime(time) + " - Time to focus!"
+                link.href = "%PUBLIC_URL%/favicon.ico";
+            break
+
+            case "_break":
+                document.title = formatTime(time) + " - Take a quick break"
+                link.href = "%PUBLIC_URL%/favicon-break.ico";
+            break
+
+            case "longbreak":
+                document.title = formatTime(time) + " - Take a long break"
+                link.href = "%PUBLIC_URL%/favicon-longbreak.ico";
+            break
+
+            default:
+                document.title = "Pomodoree - " + formatTime(time) 
+        }
+        
+    }, [time])
 
     const formatTime = (time) => {
         const min = Math.floor(time / 60)
@@ -14,6 +38,7 @@ const Timer = ({time}) => {
           sec > 9 ? sec : '0' + sec
         ].filter(Boolean).join(':');
     }
+    
     
     return (
         <div className="timer">
