@@ -27,7 +27,7 @@ const Timer = ({time, category}) => {
                 document.title = "Pomodoree - " + formatTime(time) 
         }
         
-    }, [time])
+    }, [time, category, link])
 
     const formatTime = (time) => {
         const min = Math.floor(time / 60)
