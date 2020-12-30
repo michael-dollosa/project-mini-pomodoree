@@ -1,0 +1,82 @@
+// --color-pomodoro: #C93751;
+// --color-break: #34BD7B;
+// --color-long-break: #1D98CE;
+
+.pomodoro {
+    color: var(--color-pomodoro);
+}
+
+.break {
+    color: var(--color-break);
+}
+
+.longbreak {
+    color: var(--color-long-break);
+}
+
+.nav {
+    width: 30%;
+    
+    @media only screen and (max-width: 75em) {
+        width: 50%;
+    }
+
+    @media only screen and (max-width: 56.25em) {
+        width: 70%;
+    }
+
+    @media only screen and (max-width: 37.5em) {
+        width: 90%;
+        
+    }
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+    }
+    ul, li {
+        font-size: 1rem;
+        list-style: none;
+        font-weight: 400;
+
+        
+
+        @media only screen and (max-width: 37.5em) {
+            font-size: .7rem;
+        }
+
+        @media only screen and (max-width: 23.55em) {
+            font-size: .5rem;
+        }
+    }
+
+    li {
+        cursor: pointer;
+        transition: all .3s;
+    }
+
+    li:hover {
+        transform: scale(1.1) translateY(0);  
+    }
+
+    li:active {
+        transform: scale(1) translateY(1px);
+    }
+}
+
+//font colors
+.original {
+    color: var(--color-font);
+}
+
+.pomdoro {
+    color: var(--color-pomodoro);
+}
+
+.break {
+    color: var(--color-break);
+}
+
+.longbreak {
+    color: var(--color-long-break);
+}

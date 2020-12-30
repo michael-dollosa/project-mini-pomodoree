@@ -1,0 +1,186 @@
+.container-options {
+    position: absolute;
+    background-color: transparent;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    visibility: visible;
+    opacity: 1;
+
+    
+    .background-opacity {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgb(0, 0, 0);
+        opacity: .8; 
+
+    }
+    &__main {
+        width: 30%;
+        background-color: var(--color-white);
+        box-shadow: 0 .2rem 0.6rem 1px rgba(0, 0, 0, 0.6);
+        border-radius: 1.5rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+
+        
+
+        @media only screen and (min-width: 23.55em) {
+            width: 90%;
+        }
+
+        @media only screen and (min-width: 37.5em) {
+            width: 60%;
+        }
+
+        @media only screen and (min-width: 56.25em) {
+            width: 40%;
+        }
+
+        @media only screen and (min-width: 68.75em) {
+            width: 30%;
+        }
+
+        @media only screen and (max-width: 23.55em) {
+            width: 90%;
+        }
+        
+
+        &__header {
+            width: 100%;
+            //background-color: violet;
+            padding: .5rem;
+            padding-bottom: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: var(--border-bottom);
+
+            h3 {
+                font-size: 1.8rem;
+            }
+
+            .header__icon {
+                width: 2rem;
+                height: 2rem;
+                transition: transform .4s;
+                cursor: pointer;
+                transition: all .2s;
+            }
+
+            .header__icon:hover {
+                fill: var(--color-pomodoro);
+                transform: translateY(0px) rotate(180deg);
+            }
+
+
+        }
+
+        
+
+        &__body {
+            width: 100%;
+            padding: .5rem;
+            margin-top: 2rem;
+
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+
+            ul, li {
+                list-style: none;
+                font-size: 1rem;
+                width: 80%;
+                
+            }
+
+            ul {
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+            }
+
+            li {
+                line-height: 3rem;
+                
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                input {
+                    font-family: inherit;
+                    width: 3.5rem;
+                    height: 1.8rem;
+                    padding: 10px;
+                    text-align: center;
+                    border: var(--border-input);
+                    transition: all 0.5s;
+                }
+                
+                input[type=number]:focus {
+                    border: var(--border-input-focus);
+                    outline: none;
+                }
+
+            }
+
+            button {
+                //width: 40%;
+                margin-top: 3rem;
+                padding: .7rem 1.8rem;
+                background-color: var(--color-white);
+                border: var(--border-medium);
+                border-radius: 1rem;
+
+                font-weight: 300;
+                font-size: 1rem;
+                // letter-spacing: .5rem;
+                // text-indent: .5rem;
+                cursor: pointer;
+                outline: none;
+                box-shadow: 0 .2rem 0.3rem 1px rgba(0, 0, 0, 0.6);
+                transition: all .4s;
+            }
+
+            button:active {
+                transform: translateY(1px);
+                box-shadow: 0 1px 0.1rem 1px rgba(0, 0, 0, 0.6);
+            }
+
+            button:hover {
+                background-color: var(--color-break);
+                border: var(--border-light);
+                font-weight: 400;
+                color: var(--color-white);
+                letter-spacing: .3rem;
+                text-indent: .3rem;
+            }
+        }
+
+    }
+
+}
+
+
+.display-none {
+    display:none;
+    visibility: hidden;
+    opacity: 0;
+}
