@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './options.styles.scss'
 import { FaRegTimesCircle } from "react-icons/fa";
 
 const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, pomodoroTime, _breakTime, longbreakTime, pause, countdown }) => {
-// const [flag, setFlag] = useState(true)      
-//     useEffect(() => {
-//         pause()
-//         return () => {
-//             countdown()
-//             setFlag(false)
-//         }
-//     }, [flag])
 
     return (
         <div className={ optionsToggle ? "container-options" : "container-options display-none"}>

@@ -36,7 +36,6 @@ class App extends React.Component {
 
     //used componentDidUpdate for changing current active total time in case it was changed via options
     componentDidUpdate(prevProps, prevState, snapShot) {
-        console.log(prevState.[prevState.isActive+"Time"], this.state.[prevState.isActive+"Time"])
         if(this.state.[prevState.isActive+"Time"] !== prevState.[prevState.isActive+"Time"]) {
             this.changeCategory(this.state.isActive, this.state.[prevState.isActive+"Time"])
         }
