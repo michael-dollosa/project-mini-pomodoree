@@ -36,7 +36,7 @@ class App extends React.Component {
             this.changeCategory(this.state.pomodoro)
 
             //ask permission for notification
-            if(Notification.permission !== "denied") {
+            if(Notification.permission !== "granted") {
                 Notification.requestPermission()
             }
         }
