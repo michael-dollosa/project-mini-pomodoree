@@ -32,13 +32,15 @@ class App extends React.Component {
     
 
     componentDidMount() {
+        
+        //ask permission for notification
+        if(Notification.permission !== "denied") {
+            Notification.requestPermission()
+        }
+     
         if(this.state.length){
             this.changeCategory(this.state.pomodoro)
-            console.log(Notification.requestPermission())
-            //ask permission for notification
-            if(Notification.permission === "default" || Notification.permission === "denied") {
-                Notification.requestPermission()
-            }
+            
         }
     }
 
