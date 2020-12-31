@@ -99,7 +99,7 @@ class App extends React.Component {
             totalTime: this.state.totalTime - 1
             })
             
-        )}, 8)
+        )}, 1000)
     }
 
     //function for pause/clearInterval id
