@@ -14,6 +14,8 @@ class App extends React.Component {
         totalTime: 1800,
         toggle: false,
         optionsToggle: false,
+        longbreakInterval: 2,
+        longbreakCounter: 0,
         pomodoro: "pomodoro",
         pomodoroTime: 30, //in minutes
         _break: "_break",
@@ -24,13 +26,19 @@ class App extends React.Component {
         //form
         pomodoroInput: 30,
         breakInput: 5,
-        longbreakInput: 15
+        longbreakInput: 15,
+        longbreakintervalInput: 2
     }
     
 
     componentDidMount() {
         if(this.state.length){
             this.changeCategory(this.state.pomodoro)
+
+            //ask permission for notification
+            if(Notification.permission !== "denied") {
+                Notification.requestPermission()
+            }
         }
     }
 
@@ -39,8 +47,47 @@ class App extends React.Component {
         if(this.state.[prevState.isActive+"Time"] !== prevState.[prevState.isActive+"Time"]) {
             this.changeCategory(this.state.isActive, this.state.[prevState.isActive+"Time"])
         }
+        if(this.state.totalTime === 0) {
+            const { isActive, longbreakCounter, longbreakInterval } = this.state
+            this.automaticChangeCategory(isActive, longbreakCounter, longbreakInterval)
+        }
     }
     
+    //automatic change category once timer is at 0
+    automaticChangeCategory = (category, counter, interval) => {
+        switch(category) {
+            case "pomodoro":
+                this.setState(state => ({longbreakCounter: state.longbreakCounter + 1}))
+            //if counter !== interval -> isAction is set to break pass in notification message
+                if(counter !== interval) {
+                    const message = "Time to take a break!"
+                    this.showNotification(message)
+                    this.changeCategory("_break")
+                }
+            //if counter === interval -> isAction is set to lonbreak pass in notification message
+                if(counter === interval) {
+                    this.showNotification("Time to take a long rest!")
+                    this.changeCategory("longbreak")
+                }
+            break;
+
+            case "_break":
+            //regardless of counter and interval, pass notification to message, set active to pomodoro
+                this.showNotification("Time to focus!")
+                this.changeCategory("pomodoro")
+            break;
+
+            case "longbreak":
+            //set counter to 0
+                this.setState({longbreakCounter: 0})
+            //pass notification to message
+                this.showNotification("Time to focus!")
+                this.changeCategory("pomodoro")
+            break
+
+            default:
+        }
+    }
     //function for start
     countdown = () => {
         this.setState({ toggle: true })
@@ -50,7 +97,7 @@ class App extends React.Component {
             totalTime: this.state.totalTime - 1
             })
             
-        )}, 1000)
+        )}, 8)
     }
 
     //function for pause/clearInterval id
@@ -132,8 +179,23 @@ class App extends React.Component {
                 longbreakTime: this.state.longbreakInput
             })
         }
+
+        if(this.state.longbreakintervalInput) {
+            this.setState({
+                longbreakInterval: this.state.longbreakintervalInput
+            })
+        }
         
         this.optionsToggle()
+    }
+
+
+    showNotification = (message) => {
+        // const notification = new Notification(message, {
+        //   body: message,
+        //   //icon: "/favicon.ico"
+        // })
+        const notification = new Notification(message)
     }
 
     render() {

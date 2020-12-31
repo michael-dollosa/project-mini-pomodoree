@@ -26,7 +26,7 @@
         width: 30%;
         background-color: var(--color-white);
         box-shadow: 0 .2rem 0.6rem 1px rgba(0, 0, 0, 0.6);
-        border-radius: 1.5rem;
+        //border-radius: 1.5rem;
         padding: 2rem;
         display: flex;
         flex-direction: column;
@@ -45,11 +45,11 @@
         }
 
         @media only screen and (min-width: 56.25em) {
-            width: 40%;
+            width: 50%;
         }
 
         @media only screen and (min-width: 68.75em) {
-            width: 30%;
+            width: 40%;
         }
 
         @media only screen and (max-width: 23.55em) {
@@ -59,7 +59,6 @@
 
         &__header {
             width: 100%;
-            //background-color: violet;
             padding: .5rem;
             padding-bottom: 1.5rem;
             display: flex;
@@ -125,6 +124,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                
                 p {
                     margin-top: 2rem;                    
                     line-height: 1rem;
@@ -133,6 +133,7 @@
                     font-style: italic;
                 }
                 input {
+
                     font-family: inherit;
                     width: 3.5rem;
                     height: 1.8rem;
@@ -147,6 +148,7 @@
                     outline: none;
                 }
 
+              
             }
 
             button {

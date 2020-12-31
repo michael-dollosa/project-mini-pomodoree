@@ -2,7 +2,7 @@ import React from 'react'
 import './options.styles.scss'
 import { FaRegTimesCircle } from "react-icons/fa";
 
-const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, pomodoroTime, _breakTime, longbreakTime, pomodoroInput, breakInput, longbreakInput}) => {
+const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, pomodoroTime, _breakTime, longbreakTime, longbreakInterval, pomodoroInput, breakInput, longbreakInput, longbreakintervalInput}) => {
 
     return (
         <div className={ optionsToggle ? "container-options" : "container-options display-none"}>
@@ -14,7 +14,10 @@ const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, po
                 </div>
                 <div className="container-options__main__body">
                     <ul className="body__list">
-                        <li>category <label>minutes</label></li>
+                        <li>
+                            <label>category</label> 
+                            <label>minutes</label>
+                        </li>
                         <li>
                             pomodoro 
                             <input 
@@ -51,6 +54,18 @@ const Options = ({ optionsToggle, _optionsToggle, optionsSave, inputListener, po
                                 name="longbreakInput"
                                 placeholder = {longbreakTime}
                                 value={longbreakInput}
+                                onChange={(event) => inputListener(event.target)}
+                            /> 
+                        </li>
+                        <li>
+                            <label>long break interval</label>
+                            <input 
+                                type="number" 
+                                min="1"
+                                max="2"
+                                name="longbreakintervalInput"
+                                placeholder = {longbreakInterval}
+                                value={longbreakintervalInput}
                                 onChange={(event) => inputListener(event.target)}
                             /> 
                         </li>
