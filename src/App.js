@@ -197,9 +197,17 @@ class App extends React.Component {
         //   body: message,
         //   //icon: "/favicon.ico"
         // })
+        this.play()
         const notification = new Notification(message)
     }
 
+    //bell sound
+
+    play = () => {
+        var audio = new Audio('./bell.wav');
+        audio.play();
+      }
+      
     render() {
         const { totalTime, toggle, ...otherProps } = this.state
         if(this.state.totalTime === 0){
