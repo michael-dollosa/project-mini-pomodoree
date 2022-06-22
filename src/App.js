@@ -7,7 +7,7 @@ import { FaCog } from "react-icons/fa";
 //styles
 import './App.styles.scss'
 import Options from './components/options/options.component';
-import { BrowserView, isMobile, MobileView } from 'react-device-detect';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 class App extends React.Component {
     state = {
@@ -248,6 +248,7 @@ class App extends React.Component {
         }
         return(
             <>
+            <BrowserView>
             <div className={"container " + [this.state.isActive + "BG"]}>
                         <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
                         <div className="container-main">
@@ -257,6 +258,12 @@ class App extends React.Component {
                             <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
                         </div>
                     </div>
+            </BrowserView>
+            <MobileView>
+            <div className="container pomodoroBG">
+                        <h1>This is for mobile view</h1>
+                    </div>
+            </MobileView>
             </>
             
         )
