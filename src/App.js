@@ -248,9 +248,15 @@ class App extends React.Component {
         }
         return(
             <>
-            <div className="container pomodoroBG">
-                <h1>Is Mobile: {isMobile.toString()}</h1>
-            </div>
+            <div className={"container " + [this.state.isActive + "BG"]}>
+                        <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
+                        <div className="container-main">
+                            <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
+                            <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
+                            <Timer time={totalTime} category={this.state.isActive} />
+                            <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
+                        </div>
+                    </div>
             </>
             
         )
