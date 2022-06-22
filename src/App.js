@@ -7,6 +7,7 @@ import { FaCog } from "react-icons/fa";
 //styles
 import './App.styles.scss'
 import Options from './components/options/options.component';
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 class App extends React.Component {
     state = {
@@ -46,8 +47,26 @@ class App extends React.Component {
 
     //used componentDidUpdate for changing current active total time in case it was changed via options
     componentDidUpdate(prevProps, prevState, snapShot) {
-        if(this.state.[prevState.isActive+"Time"] !== prevState.[prevState.isActive+"Time"]) {
-            this.changeCategory(this.state.isActive, this.state.[prevState.isActive+"Time"])
+        let currentTimeLabel = ""
+        let prevTimeLabel = ""
+        switch(prevState){
+            case "pomodoro":
+                currentTimeLabel = this.state.pomodoroTime;
+                prevTimeLabel = prevState.pomodoroTime
+                break;
+            case "_break":
+                currentTimeLabel = this.state._breakTime
+                prevTimeLabel = prevState._breakTime
+                break;
+            case "longbreak":
+                currentTimeLabel = this.state.longbreakTime
+                prevTimeLabel = prevState.longbreakTime
+                break;
+            default:
+        }
+
+        if(currentTimeLabel !== prevTimeLabel) {
+            this.changeCategory(this.state.isActive, currentTimeLabel)
         }
         if(this.state.totalTime === 0) {
             const { isActive, longbreakCounter, longbreakInterval } = this.state
@@ -111,9 +130,23 @@ class App extends React.Component {
 
     //setting state once category is changed
     changeCategory = (categoryName) => {
+        let categoryNameLabel = ""
+        switch(categoryName){
+            case "pomodoro":
+                categoryNameLabel = this.state.pomodoroTime;
+                break;
+            case "_break":
+                categoryNameLabel = this.state._breakTime
+                break;
+            case "longbreak":
+                categoryNameLabel = this.state.longbreakTime
+                break;
+            default:
+        }
+
         this.setState({
             isActive: categoryName,
-            totalTime: this.state.[categoryName+"Time"] * 60
+            totalTime: categoryNameLabel * 60
         }, this.pause())
     
     }
@@ -214,15 +247,23 @@ class App extends React.Component {
             this.changeCategory(this.state.isActive)
         }
         return(
-            <div className={"container " + [this.state.isActive + "BG"]}>
-                <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
-                <div className="container-main">
-                    <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
-                    <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
-                    <Timer time={totalTime} category={this.state.isActive} />
-                    <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
+            <>
+            <BrowserView>
+                <div className={"container " + [this.state.isActive + "BG"]}>
+                    <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
+                    <div className="container-main">
+                        <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
+                        <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
+                        <Timer time={totalTime} category={this.state.isActive} />
+                        <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
+                    </div>
                 </div>
-            </div>
+            </BrowserView>
+            <MobileView>
+                <h1>This is for mobile view</h1>
+            </MobileView>
+            </>
+            
         )
     }
 }
