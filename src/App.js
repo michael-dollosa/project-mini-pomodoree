@@ -251,7 +251,9 @@ class App extends React.Component {
             {
                 isMobile
                 ? (
-                    <h1>This is for mobile view</h1>
+                    <div className="container pomodoroBG">
+                        <h1>This is for mobile view</h1>
+                    </div>
                 )
                 : (
                     <div className={"container " + [this.state.isActive + "BG"]}>
