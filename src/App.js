@@ -7,7 +7,7 @@ import { FaCog } from "react-icons/fa";
 //styles
 import './App.styles.scss'
 import Options from './components/options/options.component';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 class App extends React.Component {
     state = {
@@ -248,20 +248,23 @@ class App extends React.Component {
         }
         return(
             <>
-            <BrowserView>
-                <div className={"container " + [this.state.isActive + "BG"]}>
-                    <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
-                    <div className="container-main">
-                        <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
-                        <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
-                        <Timer time={totalTime} category={this.state.isActive} />
-                        <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
+            {
+                isMobile
+                ? (
+                    <h1>This is for mobile view</h1>
+                )
+                : (
+                    <div className={"container " + [this.state.isActive + "BG"]}>
+                        <Options _optionsToggle={this.optionsToggle} inputListener={this.inputListener} optionsSave={this.optionsSave} pause={this.pause} countdown={this.countdown} {...otherProps}/>
+                        <div className="container-main">
+                            <FaCog className="container-main__icon-gear" onClick={this.optionsToggle}/>
+                            <Nav changeCategory={ this.changeCategory } pause={this.pause} {...otherProps} />
+                            <Timer time={totalTime} category={this.state.isActive} />
+                            <TimerButton name={ toggle ? "pause" : "start" } countdown={this.countdown} pause={this.pause} toggle={ toggle } />
+                        </div>
                     </div>
-                </div>
-            </BrowserView>
-            <MobileView>
-                <h1>This is for mobile view</h1>
-            </MobileView>
+                )
+            }
             </>
             
         )
